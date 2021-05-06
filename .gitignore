@@ -1,0 +1,8 @@
+*.o
+*.swp
+*.swp
+/.qmake.stash
+/.ycm_extra_conf.py
+/libtlcstyle.so
+Makefile*
+moc_*.*
