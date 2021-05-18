@@ -75,7 +75,7 @@ TlcStyle::standardPalette() const // override
 void
 TlcStyle::polish( QPalette & palette ) // override
 {
-  qDebug() << Q_FUNC_INFO;
+  //qDebug() << Q_FUNC_INFO;
   //palette.setBrush( QPalette::Button, Qt::blue );
 }
 
