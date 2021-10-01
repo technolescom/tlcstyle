@@ -25,7 +25,7 @@ QPalette
 TlcStyle::standardPalette() const // override
 {
   if ( ! m_standard_palette.isBrushSet( QPalette::Disabled, QPalette::Mid ) ) {
-     QColor gray("#484848");
+     QColor gray("#606060");
      QColor beige(180, 180, 180);
      //QColor slightlyOpaqueBlack(0, 0, 0, 63);
 
@@ -48,7 +48,7 @@ TlcStyle::standardPalette() const // override
 
      palette.setBrush( QPalette::Text, QColor("#dddddd") );
      palette.setBrush( QPalette::BrightText, Qt::white );
-     palette.setBrush( QPalette::Base, QColor("#727272") );
+     palette.setBrush( QPalette::Base, QColor("#828282") );
      palette.setBrush( QPalette::AlternateBase, QColor("#686868") );
      palette.setBrush( QPalette::Highlight, QColor("#407446") );
      palette.setBrush( QPalette::WindowText, QColor("#cccccc") );
