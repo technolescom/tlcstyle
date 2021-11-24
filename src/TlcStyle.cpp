@@ -51,12 +51,14 @@ TlcStyle::standardPalette() const // override
 
      ///palette.setColor( QPalette::Normal, QPalette::Base, Qt::blue );
 
-     palette.setBrush( QPalette::Text, QColor("#dddddd") );
-     palette.setBrush( QPalette::BrightText, Qt::white );
-     palette.setBrush( QPalette::Base, QColor("#828282") );
-     palette.setBrush( QPalette::AlternateBase, QColor("#686868") );
+     palette.setBrush( QPalette::Text, QColor("#dfdfef") );
+     palette.setBrush( QPalette::BrightText, QColor("#fafaff") );
+     palette.setBrush( QPalette::Base, QColor("#82828c") );
+     palette.setBrush( QPalette::AlternateBase, QColor("#787882") );
      palette.setBrush( QPalette::Highlight, QColor("#407446") );
      palette.setBrush( QPalette::WindowText, QColor("#cccccc") );
+     palette.setBrush( QPalette::Link, QColor("#40d040") );
+     palette.setBrush( QPalette::LinkVisited, QColor("#20a020") );
      //setTexture(palette, QPalette::Button, buttonImage);
      //setTexture(palette, QPalette::Mid, midImage);
      //setTexture(palette, QPalette::Window, backgroundImage);
