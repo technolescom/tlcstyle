@@ -21,12 +21,17 @@
 
 #include <QDebug>
 
+TlcStyle::TlcStyle()
+  : QProxyStyle("Fusion")
+{
+}
+
 QPalette
 TlcStyle::standardPalette() const // override
 {
   if ( ! m_standard_palette.isBrushSet( QPalette::Disabled, QPalette::Mid ) ) {
-     QColor gray("#606060");
-     QColor beige(180, 180, 180);
+     QColor gray("#60606a");
+     //QColor beige(180, 180, 180);
      //QColor slightlyOpaqueBlack(0, 0, 0, 63);
 
      /*

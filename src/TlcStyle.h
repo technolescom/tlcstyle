@@ -21,7 +21,7 @@ class TlcStyle : public QProxyStyle
   Q_OBJECT
 
   public:
-    TlcStyle() = default;
+    explicit TlcStyle();
 
     QPalette standardPalette() const override;
 
