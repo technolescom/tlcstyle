@@ -64,14 +64,16 @@ TlcStyle::standardPalette() const // override
      //setTexture(palette, QPalette::Window, backgroundImage);
 
      QBrush brush = palette.window();
-     brush.setColor(brush.color().darker());
+     brush.setColor( brush.color().darker());
 
-     palette.setBrush(QPalette::Disabled, QPalette::WindowText, brush);
-     palette.setBrush(QPalette::Disabled, QPalette::Text, brush);
-     palette.setBrush(QPalette::Disabled, QPalette::ButtonText, brush);
-     palette.setBrush(QPalette::Disabled, QPalette::Base, brush);
-     palette.setBrush(QPalette::Disabled, QPalette::Button, brush);
-     palette.setBrush(QPalette::Disabled, QPalette::Mid, brush);
+     palette.setBrush( QPalette::Disabled, QPalette::Base, QColor("#5b5b61") );
+     palette.setBrush( QPalette::Disabled, QPalette::AlternateBase, QColor("#5f5f67") );
+     palette.setBrush( QPalette::Disabled, QPalette::WindowText, Qt::gray );
+     palette.setBrush( QPalette::Disabled, QPalette::Text, QColor("#7a7a84") );
+     palette.setBrush( QPalette::Disabled, QPalette::ButtonText, QColor("#7a7a84") );
+     //palette.setBrush(QPalette::Disabled, QPalette::Base, brush);
+     palette.setBrush( QPalette::Disabled, QPalette::Button, brush);
+     palette.setBrush( QPalette::Disabled, QPalette::Mid, QColor("#6b6b74") );
 
      m_standard_palette = palette;
   }
