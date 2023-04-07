@@ -16,6 +16,12 @@
 
 #include <QProxyStyle>
 
+
+namespace Tlc {
+
+  QColor brightTextColor( const QPalette & palette );
+};
+
 class TlcStyle : public QProxyStyle
 {
   Q_OBJECT
@@ -25,7 +31,7 @@ class TlcStyle : public QProxyStyle
 
     QPalette standardPalette() const override;
 
-    void polish( QPalette & palette ) override;
+    void polish( QWidget * widget ) override final;
 
     /*
     void drawPrimitive( QStyle::PrimitiveElement element, const QStyleOption

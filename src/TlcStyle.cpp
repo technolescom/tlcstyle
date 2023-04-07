@@ -14,6 +14,8 @@
  ******************************************************************************/
 
 #include "TlcStyle.h"
+#include <QCheckBox>
+#include <QRadioButton>
 
 #include <QPainter>
 #include <QStyleFactory>
@@ -81,13 +83,20 @@ TlcStyle::standardPalette() const // override
   return m_standard_palette;
 }
 
-void
-TlcStyle::polish( QPalette & palette ) // override
-{
-  //qDebug() << Q_FUNC_INFO;
-  //palette.setBrush( QPalette::Button, Qt::blue );
-}
 
+void
+TlcStyle::polish( QWidget *widget) // override
+{
+    QRadioButton *rb = qobject_cast<QRadioButton *>( widget );
+    QCheckBox *cb = qobject_cast<QCheckBox *>( widget );
+    if(rb || cb){
+        QPalette palette = widget->palette();
+        QColor color = m_standard_palette.color( QPalette::Highlight );
+        palette.setColor(QPalette::Base, Qt::lightGray);
+        palette.setColor(QPalette::Text, QColor::fromHsv( color.hue(), 255, 200 ));
+        widget->setPalette(palette);
+    }
+}
 /*
 void
 TlcStyle::drawPrimitive( QStyle::PrimitiveElement element, const QStyleOption
