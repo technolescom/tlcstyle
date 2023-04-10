@@ -32,52 +32,39 @@ QPalette
 TlcStyle::standardPalette() const // override
 {
   if ( ! m_standard_palette.isBrushSet( QPalette::Disabled, QPalette::Mid ) ) {
-     QColor gray("#60606a");
-     //QColor beige(180, 180, 180);
-     //QColor slightlyOpaqueBlack(0, 0, 0, 63);
+    QColor gray("#60606a");
+    //QColor beige(180, 180, 180);
+    //QColor slightlyOpaqueBlack(0, 0, 0, 63);
 
-     /*
-     QImage backgroundImage(":/images/woodbackground.png");
-     QImage buttonImage(":/images/woodbutton.png");
-     QImage midImage = buttonImage.convertToFormat(QImage::Format_RGB32);
+    QPalette palette( gray );
 
-     QPainter painter;
-     painter.begin(&midImage);
-     painter.setPen(Qt::NoPen);
-     painter.fillRect(midImage.rect(), slightlyOpaqueBlack);
-     painter.end();
-     */
+    ///palette.setColor( QPalette::Normal, QPalette::Base, Qt::blue );
 
+    palette.setBrush( QPalette::Text, QColor("#dfdfef") );
+    palette.setBrush( QPalette::BrightText, QColor("#fafaff") );
+    palette.setBrush( QPalette::Base, QColor("#82828c") );
+    palette.setBrush( QPalette::AlternateBase, QColor("#787882") );
+    palette.setBrush( QPalette::Highlight, QColor("#407446") );
+    palette.setBrush( QPalette::WindowText, QColor("#cccccc") );
+    palette.setBrush( QPalette::Link, QColor("#40d040") );
+    palette.setBrush( QPalette::LinkVisited, QColor("#20a020") );
+    //setTexture(palette, QPalette::Button, buttonImage);
+    //setTexture(palette, QPalette::Mid, midImage);
+    //setTexture(palette, QPalette::Window, backgroundImage);
 
-     QPalette palette( gray );
+    QBrush brush = palette.window();
+    brush.setColor( brush.color().darker());
 
-     ///palette.setColor( QPalette::Normal, QPalette::Base, Qt::blue );
+    palette.setBrush( QPalette::Disabled, QPalette::Base, QColor("#5b5b61") );
+    palette.setBrush( QPalette::Disabled, QPalette::AlternateBase, QColor("#5f5f67") );
+    palette.setBrush( QPalette::Disabled, QPalette::WindowText, Qt::gray );
+    palette.setBrush( QPalette::Disabled, QPalette::Text, QColor("#7a7a84") );
+    palette.setBrush( QPalette::Disabled, QPalette::ButtonText, QColor("#7a7a84") );
+    //palette.setBrush(QPalette::Disabled, QPalette::Base, brush);
+    palette.setBrush( QPalette::Disabled, QPalette::Button, brush);
+    palette.setBrush( QPalette::Disabled, QPalette::Mid, QColor("#6b6b74") );
 
-     palette.setBrush( QPalette::Text, QColor("#dfdfef") );
-     palette.setBrush( QPalette::BrightText, QColor("#fafaff") );
-     palette.setBrush( QPalette::Base, QColor("#82828c") );
-     palette.setBrush( QPalette::AlternateBase, QColor("#787882") );
-     palette.setBrush( QPalette::Highlight, QColor("#407446") );
-     palette.setBrush( QPalette::WindowText, QColor("#cccccc") );
-     palette.setBrush( QPalette::Link, QColor("#40d040") );
-     palette.setBrush( QPalette::LinkVisited, QColor("#20a020") );
-     //setTexture(palette, QPalette::Button, buttonImage);
-     //setTexture(palette, QPalette::Mid, midImage);
-     //setTexture(palette, QPalette::Window, backgroundImage);
-
-     QBrush brush = palette.window();
-     brush.setColor( brush.color().darker());
-
-     palette.setBrush( QPalette::Disabled, QPalette::Base, QColor("#5b5b61") );
-     palette.setBrush( QPalette::Disabled, QPalette::AlternateBase, QColor("#5f5f67") );
-     palette.setBrush( QPalette::Disabled, QPalette::WindowText, Qt::gray );
-     palette.setBrush( QPalette::Disabled, QPalette::Text, QColor("#7a7a84") );
-     palette.setBrush( QPalette::Disabled, QPalette::ButtonText, QColor("#7a7a84") );
-     //palette.setBrush(QPalette::Disabled, QPalette::Base, brush);
-     palette.setBrush( QPalette::Disabled, QPalette::Button, brush);
-     palette.setBrush( QPalette::Disabled, QPalette::Mid, QColor("#6b6b74") );
-
-     m_standard_palette = palette;
+    m_standard_palette = palette;
   }
 
   return m_standard_palette;
@@ -87,16 +74,33 @@ TlcStyle::standardPalette() const // override
 void
 TlcStyle::polish( QWidget *widget) // override
 {
-    QRadioButton *rb = qobject_cast<QRadioButton *>( widget );
-    QCheckBox *cb = qobject_cast<QCheckBox *>( widget );
-    if(rb || cb){
-        QPalette palette = widget->palette();
-        QColor color = m_standard_palette.color( QPalette::Highlight );
-        palette.setColor(QPalette::Base, Qt::lightGray);
-        palette.setColor(QPalette::Text, QColor::fromHsv( color.hue(), 255, 200 ));
-        widget->setPalette(palette);
-    }
+  QRadioButton *rb = qobject_cast<QRadioButton *>( widget );
+  QCheckBox *cb = qobject_cast<QCheckBox *>( widget );
+
+  if( rb || cb ){
+    QPalette palette = widget->palette();
+
+    QColor color = m_standard_palette.color( QPalette::Highlight );
+    palette.setColor( QPalette::Base, Qt::lightGray );
+    palette.setColor( QPalette::Text, QColor::fromHsv( color.hue(), 255, 200 ));
+    widget->setPalette(palette);
+  }
 }
+
+void
+TlcStyle::drawPrimitive( QStyle::PrimitiveElement element,
+    const QStyleOption *option, QPainter *painter, const QWidget *widget ) const
+{
+  if( element == QStyle::PE_IndicatorCheckBox ){
+    auto opt = *qstyleoption_cast<const QStyleOptionButton *>( option );
+
+    opt.palette.setColor(QPalette::Text, QColor( 0, 255, 0 ));
+
+    QProxyStyle::drawPrimitive( element, &opt, painter, widget );
+  }
+  else QProxyStyle::drawPrimitive( element, option, painter, widget );
+}
+
 /*
 void
 TlcStyle::drawPrimitive( QStyle::PrimitiveElement element, const QStyleOption

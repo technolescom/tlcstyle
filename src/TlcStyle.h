@@ -33,6 +33,9 @@ class TlcStyle : public QProxyStyle
 
     void polish( QWidget * widget ) override final;
 
+    void drawPrimitive(QStyle::PrimitiveElement element,
+      const QStyleOption *option, QPainter *painter, const QWidget *widget = nullptr) const override;
+
     /*
     void drawPrimitive( QStyle::PrimitiveElement element, const QStyleOption
         * option, QPainter * painter, const QWidget * widget = nullptr ) const
